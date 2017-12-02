@@ -23,6 +23,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/materia_nom"/>
 
+
+
     </LinearLayout>
 
     <LinearLayout
