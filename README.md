@@ -1,2 +1,0 @@
-# GradeManager
-A grade manager

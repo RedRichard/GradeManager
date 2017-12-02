@@ -1,4 +1,4 @@
-package com.example.gomri.grademanager;
+package com.example.aaron.calificaciones;
 
 import org.junit.Test;
 

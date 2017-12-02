@@ -1,4 +1,4 @@
-package com.example.gomri.grademanager;
+package com.example.aaron.calificaciones;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.gomri.grademanager", appContext.getPackageName());
+        assertEquals("com.example.aaron.calificaciones", appContext.getPackageName());
     }
 }
