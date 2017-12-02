@@ -5,9 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import clases.Materia;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<Materia> materias = new ArrayList<Materia>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    /*public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.display_materia);
+    }*/
 }
 
 

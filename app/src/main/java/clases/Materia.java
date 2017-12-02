@@ -8,31 +8,49 @@ import java.util.List;
  */
 
 public class Materia {
-    String name;
+    private String name;
 
-    double prom;//porcentaje acumulado del criterio
+    private float prom;//porcentaje acumulado del criterio
 
-    List<Criterio> criterios = new ArrayList<Criterio>();
+    private List<Criterio> criterios = new ArrayList<Criterio>();
 
 
-    Materia ( ){
+    public Materia ( ){
+        super();
         name = " ";
-        prom = 0.0;
+        prom = 0.0f;
         //criterios = {};
     }
 
-    Materia (String n){
-        name = n;
-        prom = 0.0;
+    public Materia (String name){
+        super();
+        this.name = name;
+        prom = 0.0f;
         //criterios = {};
     }
 
-    void get_prom() {
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setProm(float prom){
+        this.prom = prom;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public float getProm(){
+        return this.prom;
+    }
+
+    void calculateProm() {
         int i;
-        double sum =0.0;
+        float sum =0.0f;
 
         if (!this.criterios.isEmpty()){
-            sum = 0.0;
+            sum = 0.0f;
             for(i = 0; i < this.criterios.size();i++)
             {
                 sum += this.criterios.get(i).percentageG;
