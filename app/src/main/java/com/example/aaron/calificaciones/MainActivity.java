@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 //intent
+                createCriteriosScreen(materias.get(position));
+
+
                 Context context = getApplicationContext();
                 CharSequence text = Integer.toString(position + 1);
                 int duration = Toast.LENGTH_SHORT;
@@ -49,10 +52,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void createCriteriosScreen(Materia materia){
+        Intent criteriosMateria = new Intent(this, CriteriosScreen.class);
+        criteriosMateria.putExtra("objMateria", materia);
+        startActivity(criteriosMateria);
+    }
+
     public void add_materia(View view) {
         Intent getNewMat = new Intent(this, add_materiaScreen.class);
 
-        final int result = 1;
+        final int result = 0;
         startActivityForResult(getNewMat, result);
     }
 

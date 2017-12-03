@@ -2,25 +2,18 @@ package com.example.aaron.calificaciones;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.drm.DrmStore;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-
-import java.io.Serializable;
 
 import clases.Materia;
 
 /**
- * Created by aaron on 1/12/2017.
+ * Created by gomri on 12/2/2017.
  */
 
-public class add_materiaScreen extends Activity{
-
+public class addCriteroScreen {
     private String matName;
     private Materia materia;
 
