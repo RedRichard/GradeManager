@@ -28,6 +28,8 @@ public class editEntregableScreen extends Activity {
         entregable = (Entregable) getIntent().getSerializableExtra("objEntregable");
         setContentView(R.layout.edit_entregable);
 
+        calificacionEntregable = entregable.getGrade();
+
         entregableNameET = (EditText) findViewById(R.id.nuevo_nombre_entregable);
         calificacionET = (EditText) findViewById(R.id.nueva_calificacion_entregable);
 
@@ -39,10 +41,10 @@ public class editEntregableScreen extends Activity {
         //EditText entregableNameET = (EditText) findViewById(R.id.nuevo_nombre_entregable);
         //EditText calificacionET = (EditText) findViewById(R.id.nueva_calificacion_entregable);
 
-        entregableName = entregableNameET.getText().toString();
-        calificacionEntregable = Float.parseFloat(calificacionET.getText().toString());
+        //entregableName = entregableNameET.getText().toString();
+        //calificacionEntregable = Float.parseFloat(calificacionET.getText().toString());
 
-        //entregable = new Entregable(entregableName, calificacionEntregable);
+        setDatosEntregable(entregableNameET, calificacionET);
         entregable.setName(entregableName);
         entregable.setCalificacion(calificacionEntregable);
 
@@ -50,5 +52,15 @@ public class editEntregableScreen extends Activity {
         returnIntent.putExtra("resultEditEntregable", entregable);
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
+    }
+
+    public void setDatosEntregable(EditText nombre, EditText cal){
+        entregableName = nombre.getText().toString();
+        try {
+            calificacionEntregable = Float.parseFloat(cal.getText().toString());
+        } catch (Exception e){
+            e.printStackTrace();
+            InvalidData.printMessage(getApplicationContext());
+        }
     }
 }

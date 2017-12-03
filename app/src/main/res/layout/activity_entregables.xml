@@ -42,5 +42,20 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/promedio_criterio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:text="Average:"
+        android:paddingLeft="4dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

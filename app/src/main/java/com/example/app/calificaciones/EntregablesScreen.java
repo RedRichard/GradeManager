@@ -13,7 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -37,6 +40,7 @@ public class EntregablesScreen extends AppCompatActivity{
     private ArrayList<Entregable> entregables = new ArrayList<Entregable>();
     private ArrayAdapter<Entregable> arrayAdapter;
     private int auxIndexClickedEntregable;
+    private TextView promedioCriterio;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
@@ -48,6 +52,9 @@ public class EntregablesScreen extends AppCompatActivity{
         entregables = criterio.getEntregables();
 
         setContentView(R.layout.activity_entregables);
+
+        promedioCriterio = (TextView) findViewById(R.id.promedio_criterio);
+        setAverageText(criterio.getPromedio());
 
         setTitle("Criterion: " + criterio.getName());
 
@@ -66,12 +73,12 @@ public class EntregablesScreen extends AppCompatActivity{
                 createEditEntregablesScreen(entregables.get(position));
 
 
-                Context context = getApplicationContext();
+                /*Context context = getApplicationContext();
                 CharSequence text = Integer.toString(position + 1);
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                toast.show();*/
             }
         });
     }
@@ -125,7 +132,7 @@ public class EntregablesScreen extends AppCompatActivity{
                     Entregable resultado = (Entregable) b.getSerializable("resultNewEntregable");
                     entregables.add(resultado);
                 }
-
+                setAverageText(criterio.getPromedio());
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -139,7 +146,7 @@ public class EntregablesScreen extends AppCompatActivity{
                     entregables.set(auxIndexClickedEntregable, resultado);
                     //entregables.add(resultado);
                 }
-
+                setAverageText(criterio.getPromedio());
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -179,5 +186,9 @@ public class EntregablesScreen extends AppCompatActivity{
         setResult(Activity.RESULT_OK,returnIntent);
         super.onBackPressed();
         finish();
+    }
+
+    public void setAverageText(Float cal){
+        promedioCriterio.setText("Average: " + Float.toString(cal));
     }
 }

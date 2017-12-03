@@ -37,8 +37,10 @@ public class addCriterioScreen extends Activity{
         EditText matNameET = (EditText) findViewById(R.id.criterio_nom);
         EditText matPorcentajeET = (EditText) findViewById(R.id.porcentaje_calificacion);
 
-        criterioName = matNameET.getText().toString();
-        criterioPorcentaje = Float.parseFloat(matPorcentajeET.getText().toString());
+        /*criterioName = matNameET.getText().toString();
+        criterioPorcentaje = Float.parseFloat(matPorcentajeET.getText().toString());*/
+
+        setDatosCriterio(matNameET, matPorcentajeET);
 
         criterio = new Criterio(criterioName, criterioPorcentaje);
 
@@ -46,6 +48,16 @@ public class addCriterioScreen extends Activity{
         returnIntent.putExtra("resultNewCriterio", criterio);
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
+    }
+
+    public void setDatosCriterio(EditText nombre, EditText cal){
+        criterioName = nombre.getText().toString();
+        try {
+            criterioPorcentaje = Float.parseFloat(cal.getText().toString());
+        } catch (Exception e){
+            e.printStackTrace();
+            InvalidData.printMessage(getApplicationContext());
+        }
     }
 
 }

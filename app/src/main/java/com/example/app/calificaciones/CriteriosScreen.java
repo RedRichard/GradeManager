@@ -140,7 +140,7 @@ public class CriteriosScreen extends AppCompatActivity {
                     Criterio crit = (Criterio) b.getSerializable("criterio");
                     criterios.get(auxIndexClickedCriterio).setEntregables(entregables);
                     criterios.get(auxIndexClickedCriterio).setName(crit.getName());
-                    criterios.get(auxIndexClickedCriterio).setPorcentaje(crit.getPromedio());
+                    criterios.get(auxIndexClickedCriterio).setPorcentaje(crit.getPercentageValue());
                     //materias.add(resultado);
                 }
 

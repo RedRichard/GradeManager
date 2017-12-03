@@ -1,5 +1,7 @@
 package clases;
 
+import com.example.app.calificaciones.InvalidData;
+
 import java.io.Serializable;
 
 /**
@@ -20,6 +22,9 @@ public class Entregable implements Serializable{
     }
 
     public Entregable (String s, float g ){
+        if (g > 10 || g < 0){
+            g = 0;
+        }
         name = s;
         //date = d;
         grade = g;
@@ -34,10 +39,14 @@ public class Entregable implements Serializable{
     }
 
     public void setName(String name){
+
         this.name = name;
     }
 
     public void setCalificacion(float cal){
+        if (cal > 10 || cal < 0){
+            cal = 0;
+        }
         this.grade = cal;
     }
 

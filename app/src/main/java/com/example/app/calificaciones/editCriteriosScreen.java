@@ -29,27 +29,42 @@ public class editCriteriosScreen extends Activity{
         criterio = (Criterio) getIntent().getSerializableExtra("objCriterio");
         setContentView(R.layout.edit_criterio);
 
+        porcentaje = criterio.getPercentageValue();
+
         criterioNameET = (EditText) findViewById(R.id.nuevo_nombre_criterio);
         porcentajeET = (EditText) findViewById(R.id.nuevo_porcentaje_criterio);
 
         criterioNameET.setText(criterio.getName());
-        porcentajeET.setText(Float.toString(criterio.getPromedio()));
+        porcentajeET.setText(Float.toString(criterio.getPercentageValue()));
     }
 
     public void onSendCriterio(View view) {
         //EditText entregableNameET = (EditText) findViewById(R.id.nuevo_nombre_entregable);
         //EditText calificacionET = (EditText) findViewById(R.id.nueva_calificacion_entregable);
 
-        criterioName = criterioNameET.getText().toString();
-        porcentaje = Float.parseFloat(porcentajeET.getText().toString());
+        //criterioName = criterioNameET.getText().toString();
+        //porcentaje = Float.parseFloat(porcentajeET.getText().toString());
 
         //entregable = new Entregable(entregableName, calificacionEntregable);
+
+        setDatosCriterio(criterioNameET, porcentajeET);
+
         criterio.setName(criterioName);
-        criterio.setPorcentaje(porcentaje);
+        criterio.setPercentageValue(porcentaje);
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("resultEditCriterio", criterio);
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
+    }
+
+    public void setDatosCriterio(EditText nombre, EditText cal){
+        criterioName = nombre.getText().toString();
+        try {
+            porcentaje = Float.parseFloat(cal.getText().toString());
+        } catch (Exception e){
+            e.printStackTrace();
+            InvalidData.printMessage(getApplicationContext());
+        }
     }
 }

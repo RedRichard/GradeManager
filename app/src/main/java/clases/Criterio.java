@@ -11,6 +11,8 @@ import java.util.List;
 public class Criterio implements Serializable{
     String name;
 
+    float calificacionAcumulada;
+    float calificacionPorcentaje;
     float percentageC;//porcentaje acumulado del criterio
     float percentageG;//porcentajeC en el valor de la materia
     float percentageValue;// valor de procentaje en la materia
@@ -27,6 +29,9 @@ public class Criterio implements Serializable{
     }
 
     public Criterio (String n, float v){
+        if (v > 100 || v < 0){
+            v = 0;
+        }
         this.name = n;
         this.percentageC = 0.0f;
         this.percentageG = 0.0f;
@@ -59,7 +64,7 @@ public class Criterio implements Serializable{
     }*/
 
     public String toString(){
-        return name + "\nPercentage: " + Float.toString(percentageG) + "% / " + Float.toString(percentageValue) + "%\n";
+        return name + "\nPercentage: " + Float.toString(calificacionPorcentaje) + "% / " + Float.toString(percentageValue) + "%\n";
     }
 
     public String getName(){
@@ -69,6 +74,7 @@ public class Criterio implements Serializable{
 
     public void setEntregables(ArrayList<Entregable> entregables){
         this.entregables = entregables;
+        updatePromedio();
     }
 
     public ArrayList<Entregable> getEntregables (){
@@ -77,6 +83,16 @@ public class Criterio implements Serializable{
 
 
     public void setPorcentaje(float porcentaje) {
+        if (porcentaje > 100 || porcentaje <0){
+            porcentaje = 0;
+        }
+        this.calificacionPorcentaje = porcentaje;
+    }
+
+    public void setPercentageValue(float porcentaje) {
+        if (porcentaje > 100 || porcentaje <0){
+            porcentaje = 0;
+        }
         this.percentageValue = porcentaje;
     }
 
@@ -84,7 +100,21 @@ public class Criterio implements Serializable{
         this.name = name;
     }
 
-    public float getPromedio() {
+    public float getPercentageValue() {
+        updatePromedio();
         return this.percentageValue;
+    }
+
+    public float getPromedio(){
+        return this.calificacionPorcentaje;
+    }
+
+    public void updatePromedio(){
+        calificacionAcumulada = 0;
+        for (Entregable entregable : entregables){
+            calificacionAcumulada += entregable.getGrade();
+        }
+        calificacionAcumulada = calificacionAcumulada/(entregables.size());
+        calificacionPorcentaje = calificacionAcumulada*(percentageValue/100);
     }
 }

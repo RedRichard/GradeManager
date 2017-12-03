@@ -17,8 +17,8 @@ import clases.Entregable;
  */
 
 public class addEntregableScreen extends Activity{
-    private String entregableName;
-    private float calificacionEntregable;
+    private String entregableName = "";
+    private float calificacionEntregable = 0;
     private Entregable entregable;
 
     @Override
@@ -33,8 +33,7 @@ public class addEntregableScreen extends Activity{
         EditText entregableNameET = (EditText) findViewById(R.id.nombre_entregable);
         EditText calificacionET = (EditText) findViewById(R.id.calificacion_entregable);
 
-        entregableName = entregableNameET.getText().toString();
-        calificacionEntregable = Float.parseFloat(calificacionET.getText().toString());
+        setDatosEntregable(entregableNameET, calificacionET);
 
         entregable = new Entregable(entregableName, calificacionEntregable);
 
@@ -42,5 +41,14 @@ public class addEntregableScreen extends Activity{
         returnIntent.putExtra("resultNewEntregable", entregable);
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
+    }
+
+    public void setDatosEntregable(EditText nombre, EditText cal){
+        entregableName = nombre.getText().toString();
+        try {
+            calificacionEntregable = Float.parseFloat(cal.getText().toString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

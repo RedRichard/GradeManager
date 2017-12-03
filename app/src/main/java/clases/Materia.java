@@ -14,6 +14,8 @@ public class Materia implements Serializable{
 
     private float prom;//porcentaje acumulado del criterio
 
+    private float porcentajeAcumulado; //max 100%
+
     private ArrayList<Criterio> criterios = new ArrayList<Criterio>();
 
 
