@@ -21,29 +21,10 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nuevo_nombre_entregable"
+            android:id="@+id/nuevo_nombre_materia"
             />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grade: " />
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/nueva_calificacion_entregable"/>
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -54,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/entern_mat_name_button"
-            android:onClick="onSendEntregable"/>
+            android:onClick="onSendMateria"/>
 
     </LinearLayout>
 

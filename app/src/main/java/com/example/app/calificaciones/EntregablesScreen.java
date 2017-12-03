@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +29,7 @@ public class EntregablesScreen extends AppCompatActivity{
 
     final int REQUESTCODE_NEW_ENTREGABLE = 0;
     final int REQUEST_CODE_EDIT_ENTREGABLES = 1;
+    final int REQUEST_CODE_EDIT_CRITERIO = 2;
 
     private String matName;
     private Criterio criterio;
@@ -46,7 +49,7 @@ public class EntregablesScreen extends AppCompatActivity{
 
         setContentView(R.layout.activity_entregables);
 
-        setTitle("Criterio: " + criterio.getName());
+        setTitle("Criterion: " + criterio.getName());
 
         lv = (ListView) findViewById(R.id.lista_entregables);
         arrayAdapter = new ArrayAdapter<Entregable>(this,
@@ -71,6 +74,32 @@ public class EntregablesScreen extends AppCompatActivity{
                 toast.show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.edit:
+                createEditCriterioScreen();
+                break;
+            default:
+                break;
+
+        }
+        return true;
+    }
+
+    public void createEditCriterioScreen(){
+        Intent editCriterio = new Intent(this, editCriteriosScreen.class);
+        editCriterio.putExtra("objCriterio", this.criterio);
+        //Log.d("Nota", "llega");
+        startActivityForResult(editCriterio, REQUEST_CODE_EDIT_CRITERIO);
     }
 
     public void createEditEntregablesScreen(Entregable entregable){
@@ -115,6 +144,23 @@ public class EntregablesScreen extends AppCompatActivity{
                 arrayAdapter.notifyDataSetChanged();
             }
         }
+        if (requestCode == REQUEST_CODE_EDIT_CRITERIO){
+            if (resultCode == Activity.RESULT_OK){
+                Bundle b = data.getExtras();
+
+                if (b != null) {
+                    Criterio resultado = (Criterio) b.getSerializable("resultEditCriterio");
+                    criterio.setName(resultado.getName());
+                    criterio.setPorcentaje(resultado.getPromedio());
+                    //criterios.set(auxIndexClickedCriterio, resultado);
+                    //entregables.add(resultado);
+                }
+
+                lv.invalidate();
+                arrayAdapter.notifyDataSetChanged();
+                setTitle("Criterion: " + criterio.getName());
+            }
+        }
     }
 
     @Override
@@ -128,6 +174,7 @@ public class EntregablesScreen extends AppCompatActivity{
         materia = new Materia(matName);
         */
         Intent returnIntent = new Intent();
+        returnIntent.putExtra("criterio", criterio);
         returnIntent.putExtra("resultEntregables", entregables);
         setResult(Activity.RESULT_OK,returnIntent);
         super.onBackPressed();

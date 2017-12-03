@@ -8,7 +8,10 @@ import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_bar);
+
         if (materias.isEmpty()){
             try{
                 loadMaterias();
@@ -44,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        setTitle("Grade Manager 3000");
 
         lv = (ListView) findViewById(R.id.lista_materias);
         arrayAdapter = new ArrayAdapter<Materia>(this,
@@ -69,13 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    /*@Override
-    public void onResume(){
-        super.onResume();
-        loadMaterias();
-
-    }*/
 
     @Override
     public void onPause(){
@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (b != null) {
                     ArrayList<Criterio> criterios = (ArrayList<Criterio>) b.getSerializable("resultCriterios");
+                    String matName = b.getString("matName");
+                    materias.get(auxIndexClickedMateria).setName(matName);
                     materias.get(auxIndexClickedMateria).setCriterios(criterios);
                     //materias.add(resultado);
                 }

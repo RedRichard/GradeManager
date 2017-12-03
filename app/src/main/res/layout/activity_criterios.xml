@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_margin="10dp"
-            android:text="Criterios:"
+            android:text="Criteria:"
             android:textSize="20sp"
             android:textStyle="bold" />
         <ListView

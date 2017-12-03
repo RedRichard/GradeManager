@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,6 +31,7 @@ public class CriteriosScreen extends AppCompatActivity {
 
     final int REQUESTCODE_NEW_CRITERIO = 0;
     final int REQUESTCODE_ENTREGABLES = 1;
+    final int REQUESTCODE_EDIT_MATERIA = 2;
 
     private String matName;
     private Materia materia;
@@ -47,7 +50,7 @@ public class CriteriosScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_criterios);
 
-        setTitle("Materia: " + materia.getName());
+        setTitle("Subject: " + materia.getName());
 
         lv = (ListView) findViewById(R.id.lista_criterios);
         arrayAdapter = new ArrayAdapter<Criterio>(this,
@@ -73,8 +76,34 @@ public class CriteriosScreen extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.edit:
+                createEditMateriaScreen(materia);
+                break;
+            default:
+                break;
+
+        }
+        return true;
+    }
+
+    public void createEditMateriaScreen(Materia materia){
+        Intent editMateria = new Intent(this, editMateriaScreen.class);
+        editMateria.putExtra("objMateria", materia);
+        //Log.d("Nota", "llega");
+        startActivityForResult(editMateria, REQUESTCODE_EDIT_MATERIA);
+    }
+
     public void createEntregablesScreen(Criterio criterio){
-        Log.d("Si", "llega ");
+        //Log.d("Si", "llega ");
         Intent criteriosMateria = new Intent(this, EntregablesScreen.class);
         criteriosMateria.putExtra("objCriterio", criterio);
         startActivityForResult(criteriosMateria, REQUESTCODE_ENTREGABLES);
@@ -108,12 +137,31 @@ public class CriteriosScreen extends AppCompatActivity {
 
                 if (b != null) {
                     ArrayList<Entregable> entregables = (ArrayList<Entregable>) b.getSerializable("resultEntregables");
+                    Criterio crit = (Criterio) b.getSerializable("criterio");
                     criterios.get(auxIndexClickedCriterio).setEntregables(entregables);
+                    criterios.get(auxIndexClickedCriterio).setName(crit.getName());
+                    criterios.get(auxIndexClickedCriterio).setPorcentaje(crit.getPromedio());
                     //materias.add(resultado);
                 }
 
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
+            }
+        }
+        if (requestCode == REQUESTCODE_EDIT_MATERIA){
+            if (resultCode == Activity.RESULT_OK){
+                Bundle b = data.getExtras();
+
+                if (b != null) {
+                    Materia resultado = (Materia) b.getSerializable("resultEditMateria");
+                    materia.setName(resultado.getName());
+                    //criterios.set(auxIndexClickedCriterio, resultado);
+                    //entregables.add(resultado);
+                }
+
+                lv.invalidate();
+                arrayAdapter.notifyDataSetChanged();
+                setTitle("Subject: " + materia.getName());
             }
         }
     }
@@ -130,6 +178,7 @@ public class CriteriosScreen extends AppCompatActivity {
         */
         Intent returnIntent = new Intent();
         returnIntent.putExtra("resultCriterios", criterios);
+        returnIntent.putExtra("matName", materia.getName());
         setResult(Activity.RESULT_OK,returnIntent);
         super.onBackPressed();
         finish();

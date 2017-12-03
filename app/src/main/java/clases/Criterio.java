@@ -59,7 +59,7 @@ public class Criterio implements Serializable{
     }*/
 
     public String toString(){
-        return name + "\n" + Float.toString(percentageG) + "/" + Float.toString(percentageValue);
+        return name + "\nPercentage: " + Float.toString(percentageG) + "% / " + Float.toString(percentageValue) + "%\n";
     }
 
     public String getName(){
@@ -76,4 +76,15 @@ public class Criterio implements Serializable{
     }
 
 
+    public void setPorcentaje(float porcentaje) {
+        this.percentageValue = porcentaje;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getPromedio() {
+        return this.percentageValue;
+    }
 }

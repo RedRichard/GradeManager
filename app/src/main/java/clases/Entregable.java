@@ -42,6 +42,6 @@ public class Entregable implements Serializable{
     }
 
     public String toString(){
-        return (name + "\n" + grade + "\n");
+        return (name + "\nAssignment grade: " + grade + "\n");
     }
 }

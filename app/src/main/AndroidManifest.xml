@@ -37,7 +37,8 @@
         <activity android:name="com.example.app.calificaciones.EntregablesScreen"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
-            android:label="Lista Entregables""
+            android:label="Lista Entregables"
+            android:icon="@drawable/roundedbutton"
             />
         <activity android:name="com.example.app.calificaciones.addEntregableScreen"
             android:label="New Entregable"
@@ -49,6 +50,16 @@
         android:theme="@style/AppTheme"
         android:screenOrientation="portrait"
         />
+        <activity android:name="com.example.app.calificaciones.editMateriaScreen"
+            android:label="Edit Entregable"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="com.example.app.calificaciones.editCriteriosScreen"
+            android:label="Edit Entregable"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

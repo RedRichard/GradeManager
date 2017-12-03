@@ -80,6 +80,6 @@ public class Materia implements Serializable{
     }
 
     public String toString(){
-        return (name + "\t\t" + prom).toString();
+        return (name + "\n" + "Subject grade: " + prom + "\n").toString();
     }
 }
