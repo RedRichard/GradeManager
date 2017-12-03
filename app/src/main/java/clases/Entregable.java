@@ -1,25 +1,31 @@
 package clases;
 
+import java.io.Serializable;
+
 /**
  * Created by aaron on 1/12/2017.
  */
 
-public class Entregable {
+public class Entregable implements Serializable{
 
     String name;
-    String date;
+    //String date;
     double grade;
 
 
-    Entregable ( ){
+    public Entregable ( ){
         name  =  " ";
-        date = " ";
+        //date = " ";
         grade = 0.0;
     }
 
-    Entregable (String s, String d, float g ){
+    public Entregable (String s, float g ){
         name = s;
-        date = d;
+        //date = d;
         grade = g;
+    }
+
+    public String toString(){
+        return (name + "\n" + grade + "\n");
     }
 }

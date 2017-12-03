@@ -15,7 +15,7 @@ public class Criterio implements Serializable{
     float percentageG;//porcentajeC en el valor de la materia
     float percentageValue;// valor de procentaje en la materia
 
-    List<Entregable> entregables = new ArrayList<Entregable>();
+    private ArrayList<Entregable> entregables = new ArrayList<Entregable>();
 
 
     public Criterio ( ){
@@ -53,13 +53,27 @@ public class Criterio implements Serializable{
         this.percentageG = this.percentageC * this.percentageValue;
     }
 
-    void add_entregable (String n, String d, float g){
+    /*void add_entregable (String n, String d, float g){
         Entregable e = new Entregable(n,d,g);
         this.entregables.add(e);
-    }
+    }*/
 
     public String toString(){
         return name + "\n" + Float.toString(percentageG) + "/" + Float.toString(percentageValue);
     }
+
+    public String getName(){
+
+        return this.name;
+    }
+
+    public void setEntregables(ArrayList<Entregable> entregables){
+        this.entregables = entregables;
+    }
+
+    public ArrayList<Entregable> getEntregables (){
+        return this.entregables;
+    }
+
 
 }

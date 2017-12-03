@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.ImageView;
 import android.content.Context;
 
-import com.example.aaron.calificaciones.R;
+import com.example.app.calificaciones.R;
 
 import java.util.ArrayList;
 

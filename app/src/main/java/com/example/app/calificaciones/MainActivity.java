@@ -1,17 +1,18 @@
-package com.example.aaron.calificaciones;
+package com.example.app.calificaciones;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.app.calificaciones.R;
 
 import java.util.ArrayList;
 
@@ -57,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //Revisar:
+    /*@Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
+        arrayAdapter.notifyDataSetChanged();
+    }*/
 
     public void createCriteriosScreen(Materia materia){
         Intent criteriosMateria = new Intent(this, CriteriosScreen.class);

@@ -1,4 +1,4 @@
-package com.example.aaron.calificaciones;
+package com.example.app.calificaciones;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.app.calificaciones.R;
 
 import java.io.Serializable;
 

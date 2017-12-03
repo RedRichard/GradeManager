@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aaron.calificaciones">
+    package="com.example.app.calificaciones">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.app.calificaciones.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,16 +17,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".add_materiaScreen"
+        <activity android:name="com.example.app.calificaciones.add_materiaScreen"
             android:label="New Mat"
             android:theme="@style/AppTheme"
         />
 
-        <activity android:name=".CriteriosScreen"
+        <activity android:name="com.example.app.calificaciones.CriteriosScreen"
             android:theme="@style/AppTheme"
             />
-        <activity android:name=".addCriterioScreen"
-            android:label="New Crit"
+        <activity android:name="com.example.app.calificaciones.addCriterioScreen"
+        android:label="New Crit"
+        android:theme="@style/AppTheme"
+        />
+        <activity android:name="com.example.app.calificaciones.EntregablesScreen"
+            android:theme="@style/AppTheme"
+            />
+        <activity android:name="com.example.app.calificaciones.addEntregableScreen"
+            android:label="New Entregable"
             android:theme="@style/AppTheme"
             />
     </application>
