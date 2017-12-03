@@ -3,7 +3,9 @@ package com.example.app.calificaciones;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.app.calificaciones.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (materias.isEmpty()){
+            try{
+                loadMaterias();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
 
         lv = (ListView) findViewById(R.id.lista_materias);
         arrayAdapter = new ArrayAdapter<Materia>(this,
@@ -57,6 +68,50 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
         });
+    }
+
+    /*@Override
+    public void onResume(){
+        super.onResume();
+        loadMaterias();
+
+    }*/
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        saveMaterias();
+    }
+
+    private boolean saveMaterias(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor materiasData = sp.edit();
+    /* sKey is an array */
+        materiasData.putInt("Status_size", materias.size());
+
+        Gson gson = new Gson();
+
+        for(int i=0;i<materias.size();i++)
+        {
+            materiasData.remove("MyObject_" + i);
+            String json = gson.toJson(materias.get(i));
+            materiasData.putString("MyObject_" + i, json);
+        }
+
+        return materiasData.commit();
+    }
+
+    private void loadMaterias(){
+        SharedPreferences appSharedPrefs =   PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        Gson gson = new Gson();
+        materias.clear();
+        int size = appSharedPrefs.getInt("Status_size", 0);
+
+        for(int i=0;i<size;i++)
+        {
+            String json = appSharedPrefs.getString("MyObject_" + i, "");
+            materias.add(gson.fromJson(json, Materia.class));
+        }
     }
 
     //Revisar:
