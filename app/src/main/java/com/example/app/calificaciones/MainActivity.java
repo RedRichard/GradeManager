@@ -167,11 +167,15 @@ public class MainActivity extends AppCompatActivity {
                 Bundle b = data.getExtras();
 
                 if (b != null) {
-                    ArrayList<Criterio> criterios = (ArrayList<Criterio>) b.getSerializable("resultCriterios");
                     String matName = b.getString("matName");
-                    materias.get(auxIndexClickedMateria).setName(matName);
-                    materias.get(auxIndexClickedMateria).setCriterios(criterios);
-                    //materias.add(resultado);
+                    if (matName != null) {
+                        ArrayList<Criterio> criterios = (ArrayList<Criterio>) b.getSerializable("resultCriterios");
+
+                        materias.get(auxIndexClickedMateria).setName(matName);
+                        materias.get(auxIndexClickedMateria).setCriterios(criterios);
+                    }else{
+                        materias.remove(auxIndexClickedMateria);
+                    }
                 }
                 averageText.setText("Average : " + Float.toString(getPromedioTotal()));
                 lv.invalidate();

@@ -53,8 +53,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Delete"
+            android:onClick="onDeleteEntregable"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/entern_mat_name_button"
             android:onClick="onSendEntregable"/>
+
 
     </LinearLayout>
 

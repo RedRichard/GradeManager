@@ -54,6 +54,14 @@ public class editEntregableScreen extends Activity {
         finish();
     }
 
+    public void onDeleteEntregable(View view){
+        entregable = null;
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("resultEditEntregable", entregable);
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
+    }
+
     public void setDatosEntregable(EditText nombre, EditText cal){
         entregableName = nombre.getText().toString();
         try {

@@ -143,7 +143,11 @@ public class EntregablesScreen extends AppCompatActivity{
 
                 if (b != null) {
                     Entregable resultado = (Entregable) b.getSerializable("resultEditEntregable");
-                    entregables.set(auxIndexClickedEntregable, resultado);
+                    if (resultado != null) {
+                        entregables.set(auxIndexClickedEntregable, resultado);
+                    }else{
+                        entregables.remove(auxIndexClickedEntregable);
+                    }
                     //entregables.add(resultado);
                 }
                 setAverageText(criterio.getPromedio());
@@ -157,15 +161,23 @@ public class EntregablesScreen extends AppCompatActivity{
 
                 if (b != null) {
                     Criterio resultado = (Criterio) b.getSerializable("resultEditCriterio");
-                    criterio.setName(resultado.getName());
-                    criterio.setPercentageValue(resultado.getPercentageValue());
+                    if (resultado != null) {
+                        criterio.setName(resultado.getName());
+                        criterio.setPercentageValue(resultado.getPercentageValue());
+                        setTitle("Criterion: " + criterio.getName());
+                    }else{
+                        criterio = null;
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("criterio", criterio);
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
+                    }
                     //criterios.set(auxIndexClickedCriterio, resultado);
                     //entregables.add(resultado);
                 }
 
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
-                setTitle("Criterion: " + criterio.getName());
             }
         }
     }

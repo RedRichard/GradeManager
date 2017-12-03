@@ -45,4 +45,12 @@ public class editMateriaScreen extends Activity{
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }
+
+    public void onDeleteMateria(View view){
+        materia = null;
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("resultEditMateria", materia);
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
+    }
 }

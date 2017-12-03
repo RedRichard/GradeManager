@@ -144,12 +144,16 @@ public class CriteriosScreen extends AppCompatActivity {
                 Bundle b = data.getExtras();
 
                 if (b != null) {
-                    ArrayList<Entregable> entregables = (ArrayList<Entregable>) b.getSerializable("resultEntregables");
+
                     Criterio crit = (Criterio) b.getSerializable("criterio");
-                    criterios.get(auxIndexClickedCriterio).setEntregables(entregables);
-                    criterios.get(auxIndexClickedCriterio).setName(crit.getName());
-                    criterios.get(auxIndexClickedCriterio).setPercentageValue(crit.getPercentageValue());
-                    //materias.add(resultado);
+                    if (crit != null) {
+                        ArrayList<Entregable> entregables = (ArrayList<Entregable>) b.getSerializable("resultEntregables");
+                        criterios.get(auxIndexClickedCriterio).setEntregables(entregables);
+                        criterios.get(auxIndexClickedCriterio).setName(crit.getName());
+                        criterios.get(auxIndexClickedCriterio).setPercentageValue(crit.getPercentageValue());
+                    }else{
+                        criterios.remove(auxIndexClickedCriterio);
+                    }
                 }
                 averageText.setText("Average: " + materia.getProm());
 
@@ -163,14 +167,22 @@ public class CriteriosScreen extends AppCompatActivity {
 
                 if (b != null) {
                     Materia resultado = (Materia) b.getSerializable("resultEditMateria");
-                    materia.setName(resultado.getName());
-                    //criterios.set(auxIndexClickedCriterio, resultado);
-                    //entregables.add(resultado);
+                    if (resultado != null) {
+                        materia.setName(resultado.getName());
+                        setTitle("Subject: " + materia.getName());
+                    }else{
+                        materia = null;
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("matName", materia);
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        super.onBackPressed();
+                        finish();
+                    }
                 }
 
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
-                setTitle("Subject: " + materia.getName());
+
             }
         }
     }

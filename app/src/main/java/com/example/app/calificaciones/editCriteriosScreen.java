@@ -58,6 +58,14 @@ public class editCriteriosScreen extends Activity{
         finish();
     }
 
+    public void onDeleteCriterio(View view){
+        criterio = null;
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("resultEditCriterio", criterio);
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
+    }
+
     public void setDatosCriterio(EditText nombre, EditText cal){
         criterioName = nombre.getText().toString();
         try {
