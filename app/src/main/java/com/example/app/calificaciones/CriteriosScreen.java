@@ -47,7 +47,7 @@ public class CriteriosScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_criterios);
 
-        setTitle(materia.getName());
+        setTitle("Materia: " + materia.getName());
 
         lv = (ListView) findViewById(R.id.lista_criterios);
         arrayAdapter = new ArrayAdapter<Criterio>(this,
