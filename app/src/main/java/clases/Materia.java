@@ -1,6 +1,7 @@
 package clases;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Materia implements Serializable{
 
     private float prom;//porcentaje acumulado del criterio
 
-    private List<Criterio> criterios = new ArrayList<Criterio>();
+    private ArrayList<Criterio> criterios = new ArrayList<Criterio>();
 
 
     public Materia ( ){
@@ -36,6 +37,18 @@ public class Materia implements Serializable{
 
     public void setProm(float prom){
         this.prom = prom;
+    }
+
+    public void setCriterios(ArrayList<Criterio> criterios){
+        this.criterios = criterios;
+    }
+
+    public ArrayList<Criterio> getCriterios(){
+        return criterios;
+    }
+
+    public void addCriterio(Criterio criterio){
+        criterios.add(criterio);
     }
 
     public String getName(){

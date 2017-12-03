@@ -15,13 +15,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import clases.Criterio;
 import clases.Materia;
 
 public class MainActivity extends AppCompatActivity {
 
+    final int REQUEST_CODE_ADD_MATERIAS = 0;
+    final int REQUEST_CODE_CRITERIOS = 2;
+
     private ArrayList<Materia> materias = new ArrayList<Materia>();
     private ListView lv;
     private ArrayAdapter<Materia> arrayAdapter;
+    private int auxIndexClickedMateria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 //intent
+                auxIndexClickedMateria = position;
                 createCriteriosScreen(materias.get(position));
 
 
@@ -55,28 +61,43 @@ public class MainActivity extends AppCompatActivity {
     public void createCriteriosScreen(Materia materia){
         Intent criteriosMateria = new Intent(this, CriteriosScreen.class);
         criteriosMateria.putExtra("objMateria", materia);
-        startActivity(criteriosMateria);
+        startActivityForResult(criteriosMateria, REQUEST_CODE_CRITERIOS);
     }
 
     public void add_materia(View view) {
         Intent getNewMat = new Intent(this, add_materiaScreen.class);
 
-        final int result = 0;
-        startActivityForResult(getNewMat, result);
+        startActivityForResult(getNewMat, REQUEST_CODE_ADD_MATERIAS);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK){
-            Bundle b = data.getExtras();
+        if (requestCode == REQUEST_CODE_ADD_MATERIAS) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bundle b = data.getExtras();
 
-            if (b!=null){
-                Materia resultado= (Materia) b.getSerializable("result");
-                materias.add(resultado);
+                if (b != null) {
+                    Materia resultado = (Materia) b.getSerializable("resultMateria");
+                    materias.add(resultado);
+                }
+
+                lv.invalidate();
+                arrayAdapter.notifyDataSetChanged();
             }
+        }
+        if (requestCode == REQUEST_CODE_CRITERIOS){
+            if (resultCode == Activity.RESULT_OK){
+                Bundle b = data.getExtras();
 
-            lv.invalidate();
-            arrayAdapter.notifyDataSetChanged();
+                if (b != null) {
+                    ArrayList<Criterio> criterios = (ArrayList<Criterio>) b.getSerializable("resultCriterios");
+                    materias.get(auxIndexClickedMateria).setCriterios(criterios);
+                    //materias.add(resultado);
+                }
+
+                lv.invalidate();
+                arrayAdapter.notifyDataSetChanged();
+            }
         }
     }
 

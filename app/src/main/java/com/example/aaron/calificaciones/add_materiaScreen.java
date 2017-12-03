@@ -40,7 +40,7 @@ public class add_materiaScreen extends Activity{
         materia = new Materia(matName);
 
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("result", materia);
+        returnIntent.putExtra("resultMateria", materia);
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }
