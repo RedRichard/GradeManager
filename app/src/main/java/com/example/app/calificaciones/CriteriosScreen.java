@@ -13,9 +13,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.app.calificaciones.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,7 @@ public class CriteriosScreen extends AppCompatActivity {
     private ArrayList<Criterio> criterios = new ArrayList<Criterio>();
     private ArrayAdapter<Criterio> arrayAdapter;
     private int auxIndexClickedCriterio;
+    private TextView averageText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +53,9 @@ public class CriteriosScreen extends AppCompatActivity {
         criterios = materia.getCriterios();
 
         setContentView(R.layout.activity_criterios);
+
+        averageText = (TextView) findViewById(R.id.promedio_materia);
+        averageText.setText("Average: " + materia.getProm());
 
         setTitle("Subject: " + materia.getName());
 
@@ -66,12 +73,12 @@ public class CriteriosScreen extends AppCompatActivity {
                 auxIndexClickedCriterio = position;
                 createEntregablesScreen(criterios.get(position));
 
-                Context context = getApplicationContext();
+                /*Context context = getApplicationContext();
                 CharSequence text = Integer.toString(position + 1);
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                toast.show();*/
             }
         });
     }
@@ -126,6 +133,7 @@ public class CriteriosScreen extends AppCompatActivity {
                     criterios.add(resultado);
                     //materia.addCriterio(resultado);
                 }
+                averageText.setText("Average: " + materia.getProm());
 
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
@@ -140,9 +148,10 @@ public class CriteriosScreen extends AppCompatActivity {
                     Criterio crit = (Criterio) b.getSerializable("criterio");
                     criterios.get(auxIndexClickedCriterio).setEntregables(entregables);
                     criterios.get(auxIndexClickedCriterio).setName(crit.getName());
-                    criterios.get(auxIndexClickedCriterio).setPorcentaje(crit.getPercentageValue());
+                    criterios.get(auxIndexClickedCriterio).setPercentageValue(crit.getPercentageValue());
                     //materias.add(resultado);
                 }
+                averageText.setText("Average: " + materia.getProm());
 
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();

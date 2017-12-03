@@ -58,22 +58,16 @@ public class Materia implements Serializable{
     }
 
     public float getProm(){
+        calculateProm();
         return this.prom;
     }
 
     void calculateProm() {
-        int i;
-        float sum =0.0f;
-
-        if (!this.criterios.isEmpty()){
-            sum = 0.0f;
-            for(i = 0; i < this.criterios.size();i++)
-            {
-                sum += this.criterios.get(i).percentageG;
-            }
+        prom = 0;
+        for(Criterio criterio: criterios){
+            prom += criterio.getPromedio();
         }
-
-        this.prom = sum/this.criterios.size();
+        prom = prom/10;
     }
 
     void add_crit(String n, float v){

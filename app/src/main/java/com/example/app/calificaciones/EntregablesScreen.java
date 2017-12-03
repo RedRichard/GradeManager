@@ -158,7 +158,7 @@ public class EntregablesScreen extends AppCompatActivity{
                 if (b != null) {
                     Criterio resultado = (Criterio) b.getSerializable("resultEditCriterio");
                     criterio.setName(resultado.getName());
-                    criterio.setPorcentaje(resultado.getPromedio());
+                    criterio.setPercentageValue(resultado.getPercentageValue());
                     //criterios.set(auxIndexClickedCriterio, resultado);
                     //entregables.add(resultado);
                 }

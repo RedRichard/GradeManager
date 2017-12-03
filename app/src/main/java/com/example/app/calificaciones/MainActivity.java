@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.app.calificaciones.R;
@@ -34,21 +35,29 @@ public class MainActivity extends AppCompatActivity {
     private ListView lv;
     private ArrayAdapter<Materia> arrayAdapter;
     private int auxIndexClickedMateria;
+    private TextView averageText;
+    private float promedioTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        averageText = (TextView) findViewById(R.id.promedio_total);
+
+
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_bar);
 
         if (materias.isEmpty()){
             try{
                 loadMaterias();
+                getPromedioTotal();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+
+        averageText.setText("Average: " + Float.toString(getPromedioTotal()));
 
         setTitle("Grade Manager 3000");
 
@@ -148,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     Materia resultado = (Materia) b.getSerializable("resultMateria");
                     materias.add(resultado);
                 }
-
+                averageText.setText("Average: " + Float.toString(getPromedioTotal()));
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -164,13 +173,22 @@ public class MainActivity extends AppCompatActivity {
                     materias.get(auxIndexClickedMateria).setCriterios(criterios);
                     //materias.add(resultado);
                 }
-
+                averageText.setText("Average : " + Float.toString(getPromedioTotal()));
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
             }
         }
     }
 
+
+    private float getPromedioTotal(){
+        promedioTotal = 0f;
+        for(Materia materia: materias){
+            promedioTotal += materia.getProm();
+        }
+
+        return promedioTotal/materias.size();
+    }
 }
 
 

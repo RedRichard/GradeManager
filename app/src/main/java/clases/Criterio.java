@@ -111,10 +111,11 @@ public class Criterio implements Serializable{
 
     public void updatePromedio(){
         calificacionAcumulada = 0;
+        calificacionPorcentaje = 0;
         for (Entregable entregable : entregables){
             calificacionAcumulada += entregable.getGrade();
         }
         calificacionAcumulada = calificacionAcumulada/(entregables.size());
-        calificacionPorcentaje = calificacionAcumulada*(percentageValue/100);
+        calificacionPorcentaje = calificacionAcumulada*(percentageValue/10);
     }
 }
