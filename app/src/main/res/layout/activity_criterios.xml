@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.aaron.calificaciones.MainActivity">
+    >
 
 
     <LinearLayout
@@ -23,13 +23,13 @@
             android:textStyle="bold" />
         <ListView
             android:layout_width="match_parent"
-            android:id="@+id/lista_materias"
+            android:id="@+id/lista_criterios"
             android:layout_height="450dp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button3"
             android:layout_width="46dp"
             android:layout_height="37dp"
             android:layout_marginBottom="8dp"
@@ -38,7 +38,7 @@
             android:text="+"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:onClick="add_materia"/>
+            android:onClick="addCriterio"/>
 
     </LinearLayout>
 

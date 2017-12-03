@@ -23,7 +23,10 @@
         />
 
         <activity android:name=".CriteriosScreen"
-            android:label="New Mat"
+            android:theme="@style/AppTheme"
+            />
+        <activity android:name=".addCriterioScreen"
+            android:label="New Crit"
             android:theme="@style/AppTheme"
             />
     </application>

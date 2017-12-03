@@ -1,5 +1,6 @@
 package clases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,38 +8,38 @@ import java.util.List;
  * Created by aaron on 1/12/2017.
  */
 
-public class Criterio {
+public class Criterio implements Serializable{
     String name;
 
-    double percentageC;//porcentaje acumulado del criterio
-    double percentageG;//porcentajeC en el valor de la materia
-    double percentageValue;// valor de procentaje en la materia
+    float percentageC;//porcentaje acumulado del criterio
+    float percentageG;//porcentajeC en el valor de la materia
+    float percentageValue;// valor de procentaje en la materia
 
     List<Entregable> entregables = new ArrayList<Entregable>();
 
 
-    Criterio ( ){
+    public Criterio ( ){
         this.name = " ";
-        this.percentageC = 0.0;
-        this.percentageG = 0.0;
-        this.percentageValue = 0.0;
+        this.percentageC = 0.0f;
+        this.percentageG = 0.0f;
+        this.percentageValue = 0.0f;
         //this.entregables = {};
     }
 
-    Criterio (String n, float v){
+    public Criterio (String n, float v){
         this.name = n;
-        this.percentageC = 0.0;
-        this.percentageG = 0.0;
+        this.percentageC = 0.0f;
+        this.percentageG = 0.0f;
         this.percentageValue = v;
        // this.entregables = {};
     }
 
     void set_promC (){
         int i;
-        double sum;
+        float sum;
         if (!this.entregables.isEmpty())
         {
-            sum = 0.0;
+            sum = 0.0f;
             for(i = 0; i < this.entregables.size(); i++)
             {
                 sum += this.entregables.get(i).grade;
@@ -55,6 +56,10 @@ public class Criterio {
     void add_entregable (String n, String d, float g){
         Entregable e = new Entregable(n,d,g);
         this.entregables.add(e);
+    }
+
+    public String toString(){
+        return name + "\n" + Float.toString(percentageG) + "/" + Float.toString(percentageValue);
     }
 
 }
