@@ -8,13 +8,13 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Materias:"
             android:textStyle="bold"
@@ -22,7 +22,7 @@
             android:layout_margin="10dp"
             android:layout_gravity="start"/>
         <ListView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/lista_materias"
             android:layout_height="450dp"
             tools:layout_editor_absoluteX="8dp"

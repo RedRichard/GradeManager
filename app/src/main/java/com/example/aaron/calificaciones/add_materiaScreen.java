@@ -5,10 +5,15 @@ import android.content.Intent;
 import android.drm.DrmStore;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import java.io.Serializable;
+
+import clases.Materia;
 
 /**
  * Created by aaron on 1/12/2017.
@@ -16,7 +21,8 @@ import android.widget.EditText;
 
 public class add_materiaScreen extends Activity{
 
-    //private String matName;
+    private String matName;
+    private Materia materia;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,8 +33,14 @@ public class add_materiaScreen extends Activity{
     }
 
     public void onSendMatName(View view) {
+        EditText matNameET = (EditText)
+                findViewById(R.id.materia_nom);
+        matName = matNameET.getText().toString();
+
+        materia = new Materia(matName);
+
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("result",1);
+        returnIntent.putExtra("result", materia);
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
 

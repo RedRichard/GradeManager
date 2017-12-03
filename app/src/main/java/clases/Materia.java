@@ -1,5 +1,6 @@
 package clases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by aaron on 1/12/2017.
  */
 
-public class Materia {
+public class Materia implements Serializable{
     private String name;
 
     private float prom;//porcentaje acumulado del criterio
@@ -63,5 +64,9 @@ public class Materia {
     void add_crit(String n, float v){
         Criterio c = new Criterio(n,v);
         this.criterios.add(c);
+    }
+
+    public String toString(){
+        return (name + "\t\t" + prom).toString();
     }
 }
