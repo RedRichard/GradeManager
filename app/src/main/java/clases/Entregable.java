@@ -11,15 +11,7 @@ import java.io.Serializable;
 public class Entregable implements Serializable{
 
     String name;
-    //String date;
     float grade;
-
-
-    public Entregable ( ){
-        name  =  " ";
-        //date = " ";
-        grade = 0.0f;
-    }
 
     public Entregable (String s, float g ){
         if (g > 10 || g < 0){

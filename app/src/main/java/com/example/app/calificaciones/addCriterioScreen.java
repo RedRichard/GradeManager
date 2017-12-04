@@ -37,9 +37,6 @@ public class addCriterioScreen extends Activity{
         EditText matNameET = (EditText) findViewById(R.id.criterio_nom);
         EditText matPorcentajeET = (EditText) findViewById(R.id.porcentaje_calificacion);
 
-        /*criterioName = matNameET.getText().toString();
-        criterioPorcentaje = Float.parseFloat(matPorcentajeET.getText().toString());*/
-
         setDatosCriterio(matNameET, matPorcentajeET);
 
         criterio = new Criterio(criterioName, criterioPorcentaje);

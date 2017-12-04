@@ -1,12 +1,10 @@
 package com.example.app.calificaciones;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,15 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import clases.Criterio;
 import clases.Entregable;
-import clases.Materia;
 
 /**
  * Created by gomri on 12/3/2017.
@@ -48,7 +43,6 @@ public class EntregablesScreen extends AppCompatActivity{
 
         criterio = (Criterio) getIntent().getSerializableExtra("objCriterio");
 
-        //criterios = materia.getCriterios();
         entregables = criterio.getEntregables();
 
         setContentView(R.layout.activity_entregables);
@@ -68,17 +62,8 @@ public class EntregablesScreen extends AppCompatActivity{
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                //intent
                 auxIndexClickedEntregable = position;
                 createEditEntregablesScreen(entregables.get(position));
-
-
-                /*Context context = getApplicationContext();
-                CharSequence text = Integer.toString(position + 1);
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();*/
             }
         });
     }
@@ -105,14 +90,12 @@ public class EntregablesScreen extends AppCompatActivity{
     public void createEditCriterioScreen(){
         Intent editCriterio = new Intent(this, editCriteriosScreen.class);
         editCriterio.putExtra("objCriterio", this.criterio);
-        //Log.d("Nota", "llega");
         startActivityForResult(editCriterio, REQUEST_CODE_EDIT_CRITERIO);
     }
 
     public void createEditEntregablesScreen(Entregable entregable){
         Intent criteriosMateria = new Intent(this, editEntregableScreen.class);
         criteriosMateria.putExtra("objEntregable", entregable);
-        Log.d("Nota", "llega");
         startActivityForResult(criteriosMateria, REQUEST_CODE_EDIT_ENTREGABLES);
     }
 
@@ -148,7 +131,6 @@ public class EntregablesScreen extends AppCompatActivity{
                     }else{
                         entregables.remove(auxIndexClickedEntregable);
                     }
-                    //entregables.add(resultado);
                 }
                 setAverageText(criterio.getPromedio());
                 lv.invalidate();
@@ -172,8 +154,6 @@ public class EntregablesScreen extends AppCompatActivity{
                         setResult(Activity.RESULT_OK,returnIntent);
                         finish();
                     }
-                    //criterios.set(auxIndexClickedCriterio, resultado);
-                    //entregables.add(resultado);
                 }
 
                 lv.invalidate();
@@ -184,14 +164,6 @@ public class EntregablesScreen extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-
-        Log.d("Erro", "Sí regresa");
-        /*EditText matNameET = (EditText)
-                findViewById(R.id.materia_nom);
-        matName = matNameET.getText().toString();
-
-        materia = new Materia(matName);
-        */
         Intent returnIntent = new Intent();
         returnIntent.putExtra("criterio", criterio);
         returnIntent.putExtra("resultEntregables", entregables);

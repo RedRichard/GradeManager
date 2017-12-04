@@ -49,7 +49,6 @@ public class CriteriosScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         materia = (Materia) getIntent().getSerializableExtra("objMateria");
-        //criterios = null;
         criterios = materia.getCriterios();
 
         setContentView(R.layout.activity_criterios);
@@ -69,16 +68,8 @@ public class CriteriosScreen extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                //intent
                 auxIndexClickedCriterio = position;
                 createEntregablesScreen(criterios.get(position));
-
-                /*Context context = getApplicationContext();
-                CharSequence text = Integer.toString(position + 1);
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();*/
             }
         });
     }
@@ -105,12 +96,10 @@ public class CriteriosScreen extends AppCompatActivity {
     public void createEditMateriaScreen(Materia materia){
         Intent editMateria = new Intent(this, editMateriaScreen.class);
         editMateria.putExtra("objMateria", materia);
-        //Log.d("Nota", "llega");
         startActivityForResult(editMateria, REQUESTCODE_EDIT_MATERIA);
     }
 
     public void createEntregablesScreen(Criterio criterio){
-        //Log.d("Si", "llega ");
         Intent criteriosMateria = new Intent(this, EntregablesScreen.class);
         criteriosMateria.putExtra("objCriterio", criterio);
         startActivityForResult(criteriosMateria, REQUESTCODE_ENTREGABLES);
@@ -131,7 +120,6 @@ public class CriteriosScreen extends AppCompatActivity {
                 if (b != null) {
                     Criterio resultado = (Criterio) b.getSerializable("resultNewCriterio");
                     criterios.add(resultado);
-                    //materia.addCriterio(resultado);
                 }
                 averageText.setText("Average: " + materia.getProm());
 
@@ -189,14 +177,6 @@ public class CriteriosScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        //Log.d("Erro", "Sí regresa");
-        /*EditText matNameET = (EditText)
-                findViewById(R.id.materia_nom);
-        matName = matNameET.getText().toString();
-
-        materia = new Materia(matName);
-        */
         Intent returnIntent = new Intent();
         returnIntent.putExtra("resultCriterios", criterios);
         returnIntent.putExtra("matName", materia.getName());

@@ -12,33 +12,18 @@ import java.util.List;
 public class Materia implements Serializable{
     private String name;
 
-    private float prom;//porcentaje acumulado del criterio
-
-    private float porcentajeAcumulado; //max 100%
+    private float prom;
 
     private ArrayList<Criterio> criterios = new ArrayList<Criterio>();
-
-
-    public Materia ( ){
-        super();
-        name = " ";
-        prom = 0.0f;
-        //criterios = {};
-    }
 
     public Materia (String name){
         super();
         this.name = name;
         prom = 0.0f;
-        //criterios = {};
     }
 
     public void setName(String name){
         this.name = name;
-    }
-
-    public void setProm(float prom){
-        this.prom = prom;
     }
 
     public void setCriterios(ArrayList<Criterio> criterios){
@@ -49,9 +34,6 @@ public class Materia implements Serializable{
         return criterios;
     }
 
-    public void addCriterio(Criterio criterio){
-        criterios.add(criterio);
-    }
 
     public String getName(){
         return this.name;

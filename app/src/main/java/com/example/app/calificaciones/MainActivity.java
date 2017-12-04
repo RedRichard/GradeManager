@@ -1,24 +1,17 @@
 package com.example.app.calificaciones;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.app.calificaciones.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -36,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Materia> arrayAdapter;
     private int auxIndexClickedMateria;
     private TextView averageText;
-    private float promedioTotal;
+    private float promedioTotal= 0, auxPromedioTotal= 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         averageText = (TextView) findViewById(R.id.promedio_total);
-
-
-        //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custom_title_bar);
 
         if (materias.isEmpty()){
             try{
@@ -71,17 +61,9 @@ public class MainActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                //intent
                 auxIndexClickedMateria = position;
                 createCriteriosScreen(materias.get(position));
 
-
-                //Context context = getApplicationContext();
-                //CharSequence text = Integer.toString(position + 1);
-                //int duration = Toast.LENGTH_SHORT;
-
-                //Toast toast = Toast.makeText(context, text, duration);
-                //toast.show();
             }
         });
     }
@@ -95,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean saveMaterias(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor materiasData = sp.edit();
-    /* sKey is an array */
         materiasData.putInt("Status_size", materias.size());
 
         Gson gson = new Gson();
@@ -122,18 +103,6 @@ public class MainActivity extends AppCompatActivity {
             materias.add(gson.fromJson(json, Materia.class));
         }
     }
-
-    //Revisar:
-    /*@Override
-    public void onConfigurationChanged(Configuration newConfig){
-        super.onConfigurationChanged(newConfig);
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
-        arrayAdapter.notifyDataSetChanged();
-    }*/
 
     public void createCriteriosScreen(Materia materia){
         Intent criteriosMateria = new Intent(this, CriteriosScreen.class);
@@ -186,12 +155,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private float getPromedioTotal(){
-        promedioTotal = 0f;
+        auxPromedioTotal = 0f;
         for(Materia materia: materias){
-            promedioTotal += materia.getProm();
+            auxPromedioTotal += materia.getProm();
         }
-
-        return promedioTotal/materias.size();
+        promedioTotal = auxPromedioTotal/materias.size();
+        return promedioTotal;
     }
 }
 
