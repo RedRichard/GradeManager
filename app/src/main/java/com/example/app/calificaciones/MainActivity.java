@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadMaterias(){
-        SharedPreferences appSharedPrefs =   PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences appSharedPrefs =
+                PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         Gson gson = new Gson();
         materias.clear();
         int size = appSharedPrefs.getInt("Status_size", 0);
@@ -146,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
                 if (b != null) {
                     String matName = b.getString("matName");
                     if (matName != null) {
-                        ArrayList<Criterio> criterios = (ArrayList<Criterio>) b.getSerializable("resultCriterios");
+                        ArrayList<Criterio> criterios =
+                                (ArrayList<Criterio>) b.getSerializable("resultCriterios");
 
                         materias.get(auxIndexClickedMateria).setName(matName);
                         materias.get(auxIndexClickedMateria).setCriterios(criterios);

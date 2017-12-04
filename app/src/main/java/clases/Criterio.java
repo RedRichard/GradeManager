@@ -29,7 +29,8 @@ public class Criterio implements Serializable{
     }
 
     public String toString(){
-        return name + "\nPercentage: " + Float.toString(calificacionPorcentaje) + "% / " + Float.toString(percentageValue) + "%\n";
+        return name + "\nPercentage: " + Float.toString(calificacionPorcentaje) +
+                "% / " + Float.toString(percentageValue) + "%\n";
     }
 
     public String getName(){
