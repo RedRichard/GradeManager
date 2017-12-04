@@ -47,7 +47,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        averageText.setText("Average: " + Float.toString(getPromedioTotal()));
+        if(materias.size() == 0){
+            averageText.setText("Average: 0");
+        }else {
+            averageText.setText("Average: " + Float.toString(getPromedioTotal()));
+        }
 
         setTitle("Grade Manager 3000");
 
@@ -126,7 +130,11 @@ public class MainActivity extends AppCompatActivity {
                     Materia resultado = (Materia) b.getSerializable("resultMateria");
                     materias.add(resultado);
                 }
-                averageText.setText("Average: " + Float.toString(getPromedioTotal()));
+                if(materias.size() == 0){
+                    averageText.setText("Average: 0");
+                }else {
+                    averageText.setText("Average: " + Float.toString(getPromedioTotal()));
+                }
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -146,7 +154,11 @@ public class MainActivity extends AppCompatActivity {
                         materias.remove(auxIndexClickedMateria);
                     }
                 }
-                averageText.setText("Average : " + Float.toString(getPromedioTotal()));
+                if(materias.size() == 0){
+                    averageText.setText("Average: 0");
+                }else {
+                    averageText.setText("Average: " + Float.toString(getPromedioTotal()));
+                }
                 lv.invalidate();
                 arrayAdapter.notifyDataSetChanged();
             }
