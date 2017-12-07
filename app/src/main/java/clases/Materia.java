@@ -52,11 +52,6 @@ public class Materia implements Serializable{
         prom = prom/10;
     }
 
-    void add_crit(String n, float v){
-        Criterio c = new Criterio(n,v);
-        this.criterios.add(c);
-    }
-
     public String toString(){
         return (name + "\n" + "Subject grade: " + prom + "\n").toString();
     }

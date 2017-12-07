@@ -13,7 +13,7 @@ public class Criterio implements Serializable{
     private String name;
 
     private float calificacionAcumulada;
-    private float calificacionPorcentaje;
+    private float calificacionPorcentaje = 0;
     private float percentageValue;// valor de procentaje en la materia
 
     private ArrayList<Entregable> entregables = new ArrayList<Entregable>();
@@ -38,9 +38,17 @@ public class Criterio implements Serializable{
         return this.name;
     }
 
+    public float getCalificacionPorcentaje(){
+        return this.calificacionPorcentaje;
+    }
+
     public void setEntregables(ArrayList<Entregable> entregables){
         this.entregables = entregables;
         updatePromedio();
+    }
+
+    public void setCalificacionPorcentaje(float cal){
+        this.calificacionPorcentaje = cal;
     }
 
     public ArrayList<Entregable> getEntregables (){
